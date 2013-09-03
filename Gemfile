@@ -18,3 +18,4 @@ group :development do
 end
 
 gem 'jquery-rails'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'

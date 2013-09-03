@@ -1,0 +1,47 @@
+<%= form_for(@game) do |f| %>
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% @game.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label>Home Team</label>
+    <%= f.select(:home_team, options_for_select(@teams)) %>
+  </div>
+
+  <div class="field">
+    <label>Away Team</label>
+    <%= f.select(:away_team, options_for_select(@teams)) %>
+  </div>
+
+  <div class='field'>
+    <label>Home Player</label>
+    <%= f.select(:home_player_id, options_for_select(@players)) %>
+  </div>
+
+  <div class='field'>
+    <label>Away Player</label>
+    <%= f.select(:away_player_id, options_for_select(@players)) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :home_player_score %><br />
+    <%= f.number_field :home_player_score %>
+  </div>
+  <div class="field">
+    <%= f.label :away_player_score %><br />
+    <%= f.number_field :away_player_score %>
+  </div>
+  <br/>
+
+  <div class="actions">
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

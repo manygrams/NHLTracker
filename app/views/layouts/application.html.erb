@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>NHLTracker</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>NHLTracker</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <a class="navbar-brand" href="/">NHLTracker</a>
+      <% unless Player.all.empty? %>
+        <%= link_to 'Add game', new_game_path, class: 'btn btn-primary navbar-btn' %>
+      <% end %>
+      <%= link_to 'Add player', new_player_path, class: 'btn btn-primary navbar-btn' %>
+    </div>
+  </nav>
+  <div class="container">
+    <%= yield %>
+  </div>
+  </body>
 </html>
