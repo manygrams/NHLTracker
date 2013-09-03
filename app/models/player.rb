@@ -11,7 +11,13 @@ class Player < ActiveRecord::Base
   end
 
   def answer_factor
-    (10*(goals.to_f / opposition_goals.to_f)).to_i
+    if opposition_goals == 0 && goals > 0
+      nil
+    elsif opposition_goals == 0
+      0
+    else
+      (10*(goals.to_f / opposition_goals.to_f)).to_i
+    end
   end
 
   def goals

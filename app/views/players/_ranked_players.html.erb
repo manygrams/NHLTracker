@@ -22,7 +22,13 @@
         <td><%= player.games_won.length %></td>
         <td><%= player.games_lost.length %></td>
         <td><%= player.goals %></td>
-        <td><%= player.answer_factor %></td>
+        <td>
+          <% if player.answer_factor.nil? %>
+            &infin;
+          <% else %>
+            <%= player.answer_factor %>
+          <% end %>
+        </td>
         <td><%= player.win_percent %></td>
       </tr>
     <% end %>
