@@ -34,6 +34,8 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @home = Player.find(@game.home_player_id)
+    @away = Player.find(@game.away_player_id)
 
     respond_to do |format|
       format.html
