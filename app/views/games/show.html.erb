@@ -1,35 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Home team:</b>
-  <%= @game.home_team %>
-</p>
-
-<p>
-  <b>Away team:</b>
-  <%= @game.away_team %>
-</p>
-
-<p>
-  <b>Home player:</b>
-  <%= @home.name %>
-</p>
-
-<p>
-  <b>Away player:</b>
-  <%= @away.name %>
-</p>
-
-<p>
-  <b>Home player score:</b>
-  <%= @game.home_player_score %>
-</p>
-
-<p>
-  <b>Away player score:</b>
-  <%= @game.away_player_score %>
-</p>
-
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<div class='row'>
+  <div class='col-md-5'>
+    <p class='text-center'>Home Team</p>
+    <div class='team-icon'>
+      <img src='/habs.jpg' />
+    </div>
+    <h1 class='text-center'><%= @game.home_team %></h1>
+    <h2 class='text-center'><%= @home.name %></h2>
+    <h1 class='text-center'><%= @game.home_player_score %></h1>
+  </div>
+  <div class='col-md-2'>
+    <h1 class='text-center' id='vs'>vs.</h1>
+  </div>
+  <div class='col-md-5'>
+    <p class='text-center'>Away Team</p>
+    <div class='team-icon'>
+      <img src='/habs.jpg' />
+    </div>
+    <h1 class='text-center'><%= @game.away_team %></h1>
+    <h2 class='text-center'><%= @away.name %></h2>
+    <h1 class='text-center'><%= @game.away_player_score %></h1>
+  </div>
+</div>

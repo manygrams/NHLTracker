@@ -6,8 +6,11 @@ class Player < ActiveRecord::Base
   validates :name, uniqueness: { :message => 'This person has already been created.' }
   validates :email, uniqueness: { :message => 'This email has already been used.' }
 
+  def won_game(game)
+  end
+
   def games
-    home_games + away_games
+    (home_games + away_games).sort_by { |g| g.id }
   end
 
   def answer_factor

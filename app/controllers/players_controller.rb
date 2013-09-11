@@ -11,11 +11,7 @@ class PlayersController < ApplicationController
 
   def show
     @player = Player.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @player }
-    end
+    @games = @player.games.last(10)
   end
 
   def new
@@ -34,14 +30,10 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(params[:player])
 
-    respond_to do |format|
-      if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
-        format.json { render json: @player, status: :created, location: @player }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
+    if @player.save
+      redirect_to root_url, notice: 'Player was successfully created.'
+    else
+      render action: "edit"
     end
   end
 

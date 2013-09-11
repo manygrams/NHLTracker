@@ -1,0 +1,24 @@
+<div class='well well-large'>
+  <table class='table table-bordered table-hover'>
+    <tr>
+      <td><h2>Win Percentage</h2></td>
+      <td><h2 class='text-right'><%= @player.win_percent %>%</h2></td>
+    </tr>
+    <tr>
+      <td><h2>Wins</h2></td>
+      <td><h2 class='text-right'><%= @player.games_won.length %></h2></td>
+    </tr>
+    <tr>
+      <td><h2>Losses</h2></td>
+      <td><h2 class='text-right'><%= @player.games_lost.length %></h2></td>
+    </tr>
+    <tr>
+      <td><h2>Goals Scored</h2></td>
+      <td><h2 class='text-right'><%= @player.goals %></h2></td>
+    </tr>
+    <tr>
+      <td><h2>Goals Against</h2></td>
+      <td><h2 class='text-right'><%= @player.opposition_goals %></h2></td>
+    </tr>
+  </table>
+</div>

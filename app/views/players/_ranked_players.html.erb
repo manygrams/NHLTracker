@@ -1,5 +1,5 @@
 <div class='jumbotron'>
-  <table class='table table-hover'>
+  <table class='table'>
     <thead>
       <td><b>Name</b></td>
       <td><b>Best Team</b></td>
@@ -11,7 +11,7 @@
     </thead>
     <% @ranked_players.each do |player| %>
       <tr>
-        <td><%= player.name %></td>
+        <td><%= link_to player.name, player_url(player) %></td>
         <td>
           <% if player.best_team.nil? %>
             Player has not won any games

@@ -1,0 +1,28 @@
+<div class='well well-large'>
+  <h3>Last <%= pluralize(@games.length, 'Game') %></h3>
+  <table class='table table-bordered table-responsive'>
+    <thead>
+      <tr>
+        <td>Date</td>
+        <td>Opposition's Name</td>
+        <td>Player's Side</td>
+        <td>Player's Team</td>
+        <td>Player's Score</td>
+        <td>Opposition's Team</td>
+        <td>Opposition's Score</td>
+      </tr>
+    </thead>
+    <% @games.reverse.each do |game| %>
+      <% @opposition = game.get_opposition_player(@player) %>
+      <tr class=<%= game.won(@player) ? 'success' : 'danger' %>>
+        <td><%= link_to game.created_at.in_time_zone('Eastern Time (US & Canada)').to_date.to_s(:long_ordinal), game %></td>
+        <td><%= link_to @opposition.name, @opposition %></td>
+        <td><%= game.get_side(@player) %></td>
+        <td><%= game.get_team_name(@player) %></td>
+        <td><%= game.get_score(@player) %></td>
+        <td><%= game.get_opposition_name(@player) %></td>
+        <td><%= game.get_opposition_score(@player) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
