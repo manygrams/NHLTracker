@@ -69,6 +69,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     multi_json (1.7.9)
+    newrelic_rpm (3.5.7.59)
     pg (0.16.0)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
@@ -135,6 +136,7 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 3.2.1)
   jquery-rails
+  newrelic_rpm
   pg
   quiet_assets
   rails (= 3.2.14)
