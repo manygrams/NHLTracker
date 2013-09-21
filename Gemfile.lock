@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 1f66a91f05b5d6a657d46501332ed8c9f680c531
+  revision: 2bc320beace2dba793a676283c3a25fc3ce66d85
   specs:
-    anjlab-bootstrap-rails (3.0.0.2)
+    anjlab-bootstrap-rails (3.0.0.3)
       railties (>= 3.0)
       sass (>= 3.2)
 
@@ -37,7 +37,7 @@ GEM
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     arel (3.0.2)
-    better_errors (0.9.0)
+    better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
@@ -68,9 +68,9 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25)
-    multi_json (1.7.9)
-    newrelic_rpm (3.5.7.59)
-    pg (0.16.0)
+    multi_json (1.8.0)
+    newrelic_rpm (3.6.7.152)
+    pg (0.17.0)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)

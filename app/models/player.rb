@@ -87,7 +87,7 @@ class Player < ActiveRecord::Base
     if games_won.empty?
       nil
     else
-      GamesController::NHL_TEAMS.sort_by { |team| team_win_percent(team) }.last
+      GamesController::NHL_TEAMS.keys.sort_by { |team| team_win_percent(team) }.last
     end
   end
 

@@ -7,7 +7,7 @@ Player.create(name: 'Dan Eveleigh', email: 'dan.eveleigh@jadedpixel.com')
 
 500.times do
   players = Player.all.sample(2)
-  teams   = GamesController::NHL_TEAMS.sample(2)
+  teams   = GamesController::NHL_TEAMS.keys.sample(2)
   scores  = (0..6).to_a.sample(2)
 
   home_player       = players.first
