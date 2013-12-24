@@ -13,16 +13,6 @@ class Player < ActiveRecord::Base
     (home_games + away_games).sort_by { |g| g.id }
   end
 
-  def answer_factor
-    if opposition_goals == 0 && goals > 0
-      nil
-    elsif opposition_goals == 0
-      0
-    else
-      (10*(goals.to_f / opposition_goals.to_f)).to_i
-    end
-  end
-
   def goals
     home_goals + away_goals
   end
