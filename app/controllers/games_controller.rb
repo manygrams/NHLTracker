@@ -105,7 +105,7 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
-    @players = Player.all.map { |p| [ p.name, p.id ] }
+    @players = Player.all.sort_by { |p| p.name.downcase }.map { |p| [ p.name, p.id ] }
     @teams = NHL_TEAMS
 
     respond_to do |format|

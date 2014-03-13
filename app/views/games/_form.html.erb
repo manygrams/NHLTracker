@@ -1,4 +1,4 @@
-<%= form_for(@game) do |f| %>
+<%= form_for(@game, html: {class: 'form-horizontal'}) do |f| %>
   <% if @game.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
@@ -11,35 +11,54 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <label>Home Team</label>
-    <%= f.select(:home_team, options_for_select(@teams)) %>
-  </div>
+  <div class='row'>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Away Team</label>
+        <div class="col-sm-8">
+          <%= f.select(:away_team, options_for_select(@teams), {}, class: 'form-control') %>
+        </div>
+      </div>
 
-  <div class="field">
-    <label>Away Team</label>
-    <%= f.select(:away_team, options_for_select(@teams)) %>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Away Player</label>
+        <div class="col-sm-8">
+          <%= f.select(:away_player_id, options_for_select(@players), {}, class: 'form-control') %>
+        </div>
+      </div>
 
-  <div class='field'>
-    <label>Home Player</label>
-    <%= f.select(:home_player_id, options_for_select(@players)) %>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Away Player Score</label>
+        <div class="col-sm-8">
+          <%= f.number_field :away_player_score, class: 'form-control' %>
+        </div>
+      </div>
+      <br/>
+    </div>
 
-  <div class='field'>
-    <label>Away Player</label>
-    <%= f.select(:away_player_id, options_for_select(@players)) %>
-  </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Home Team</label>
+        <div class="col-sm-8">
+          <%= f.select(:home_team, options_for_select(@teams), {}, class: 'form-control') %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :home_player_score %><br />
-    <%= f.number_field :home_player_score %>
+      <div class='form-group'>
+        <label class="col-sm-4 control-label">Home Player</label>
+        <div class="col-sm-8">
+          <%= f.select(:home_player_id, options_for_select(@players), {}, class: 'form-control') %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Home Player Score</label>
+        <div class="col-sm-8">
+          <%= f.number_field :home_player_score, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :away_player_score %><br />
-    <%= f.number_field :away_player_score %>
-  </div>
-  <br/>
 
   <div class="actions">
     <%= f.submit 'Submit', class: 'btn btn-primary' %>
