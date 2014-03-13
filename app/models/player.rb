@@ -38,11 +38,11 @@ class Player < ActiveRecord::Base
   end
 
   def home_games
-    Game.where(home_player_id: self.id)
+    Game.active.where(home_player_id: self.id)
   end
 
   def away_games
-    Game.where(away_player_id: self.id)
+    Game.active.where(away_player_id: self.id)
   end
 
   def games_won
@@ -84,11 +84,11 @@ class Player < ActiveRecord::Base
   private
 
   def team_win_percent(team)
-    team_home_wins = Game.where(home_player_id: self.id, home_team: team).select { |g| g.home_player_score > g.away_player_score }
-    team_away_wins = Game.where(away_player_id: self.id, away_team: team).select { |g| g.away_player_score > g.home_player_score }
+    team_home_wins = Game.active.where(home_player_id: self.id, home_team: team).select { |g| g.home_player_score > g.away_player_score }
+    team_away_wins = Game.active.where(away_player_id: self.id, away_team: team).select { |g| g.away_player_score > g.home_player_score }
 
-    team_home_losses = Game.where(home_player_id: self.id, home_team: team).select { |g| g.away_player_score > g.home_player_score }
-    team_away_losses = Game.where(away_player_id: self.id, away_team: team).select { |g| g.home_player_score > g.away_player_score }
+    team_home_losses = Game.active.where(home_player_id: self.id, home_team: team).select { |g| g.away_player_score > g.home_player_score }
+    team_away_losses = Game.active.where(away_player_id: self.id, away_team: team).select { |g| g.home_player_score > g.away_player_score }
     if team_home_wins.empty? && team_away_wins.empty?
       0
     else

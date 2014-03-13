@@ -1,5 +1,7 @@
 class Game < ActiveRecord::Base
-  attr_accessible :away_player_id, :away_team, :away_player_score, :home_player_id, :home_player_score, :home_team
+  attr_accessible :away_player_id, :away_team, :away_player_score, :home_player_id, :home_player_score, :home_team, :archived
+
+  scope :active, -> { where(archived: false) }
 
   def get_side(player)
     if away_player_id == player.id
