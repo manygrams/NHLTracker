@@ -1,16 +1,18 @@
 class Player < ActiveRecord::Base
   attr_accessible :email, :name
 
-  validates :name, presence: true
+  validates :name,  presence: true
   validates :email, presence: true
-  validates :name, uniqueness: { :message => 'This person has already been created.' }
+  validates :name,  uniqueness: { :message => 'This person has already been created.' }
   validates :email, uniqueness: { :message => 'This email has already been used.' }
 
-  def won_game(game)
-  end
+  has_many :home_games, class_name: 'Game', foreign_key: :home_player_id
+  has_many :away_games, class_name: 'Game', foreign_key: :away_player_id
 
-  def games
-    (home_games + away_games).sort_by { |g| g.id }
+  scope :players_with_active_games, -> { includes(:home_games).includes(:away_games).where('games.quarter_id = ?', Quarter.current.id) }
+
+  def active_games
+    (home_games.active + away_games.active).sort_by { |g| g.id }
   end
 
   def goals
@@ -37,20 +39,12 @@ class Player < ActiveRecord::Base
     away_games.inject(0) { |goals, game| goals + game.home_player_score }
   end
 
-  def home_games
-    Game.active.where(home_player_id: self.id)
-  end
-
-  def away_games
-    Game.active.where(away_player_id: self.id)
-  end
-
   def games_won
     home_games_won + away_games_won
   end
 
   def win_percent
-    games.empty? ? 0 : (100 * (games_won.length.to_f / (games.length.to_f))).to_i
+    active_games.empty? ? 0 : (100 * (active_games_won.length.to_f / (active_games.length.to_f))).to_i
   end
 
   def games_lost

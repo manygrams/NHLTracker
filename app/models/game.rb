@@ -1,7 +1,13 @@
 class Game < ActiveRecord::Base
-  attr_accessible :away_player_id, :away_team, :away_player_score, :home_player_id, :home_player_score, :home_team, :archived
+  attr_accessible :away_player_id, :away_team, :away_player_score, :home_player_id, :home_player_score, :home_team
 
-  scope :active, -> { where(archived: false) }
+  scope :active, -> { where(quarter_id: Quarter.current) }
+
+  belongs_to :home_player, class_name: 'Player'
+  belongs_to :away_player, class_name: 'Player'
+  belongs_to :quarter
+
+  before_validation :find_or_create_quarter
 
   def get_side(player)
     if away_player_id == player.id
@@ -59,5 +65,17 @@ class Game < ActiveRecord::Base
     else
       false
     end
+  end
+
+  private
+
+  def find_or_create_quarter
+    q = Quarter.where("'#{Time.now.utc}' BETWEEN starts_at AND ends_at").first
+    if q.nil?
+      q = Quarter.new(starts_at: Time.now.utc.beginning_of_quarter, ends_at: Time.now.utc.end_of_quarter)
+      q.save
+    end
+
+    self.quarter = q
   end
 end

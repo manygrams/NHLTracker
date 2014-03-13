@@ -5,7 +5,7 @@ Player.create(name: 'Casey Whalen', email: 'casey.whalen@jadedpixel.com')
 Player.create(name: 'Ben Courtice', email: 'ben.courtice@jadedpixel.com')
 Player.create(name: 'Dan Eveleigh', email: 'dan.eveleigh@jadedpixel.com')
 
-500.times do
+20.times do
   players = Player.all.sample(2)
   teams   = GamesController::NHL_TEAMS.keys.sample(2)
   scores  = (0..6).to_a.sample(2)

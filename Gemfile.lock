@@ -35,6 +35,9 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    bullet (4.7.1)
+      activesupport
+      uniform_notifier (>= 1.4.0)
     coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -118,6 +121,7 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uniform_notifier (1.4.0)
 
 PLATFORMS
   ruby
@@ -125,6 +129,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bullet
   coffee-rails (~> 3.2.1)
   jquery-rails
   newrelic_rpm
