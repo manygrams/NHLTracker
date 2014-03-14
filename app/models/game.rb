@@ -1,6 +1,8 @@
 class Game < ActiveRecord::Base
   attr_accessible :away_player_id, :away_team, :away_player_score, :home_player_id, :home_player_score, :home_team, :archived
 
+  before_validate :set_archived_as_false
+
   scope :active, -> { where(archived: false) }
 
   def get_side(player)
@@ -59,5 +61,9 @@ class Game < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def set_archived_as_false
+    self.archived = false
   end
 end
