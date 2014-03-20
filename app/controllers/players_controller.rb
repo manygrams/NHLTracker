@@ -2,11 +2,6 @@ class PlayersController < ApplicationController
   def index
     players = Player.all
     @ranked_players = players.sort_by { |player| -player.win_percent }
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @players }
-    end
   end
 
   def show
@@ -16,11 +11,6 @@ class PlayersController < ApplicationController
 
   def new
     @player = Player.new
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @player }
-    end
   end
 
   def edit
@@ -40,14 +30,10 @@ class PlayersController < ApplicationController
   def update
     @player = Player.find(params[:id])
 
-    respond_to do |format|
-      if @player.update_attributes(params[:player])
-        format.html { redirect_to @player, notice: 'Player was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
+    if @player.update_attributes(params[:player])
+      redirect_to @player, notice: 'Player was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -55,9 +41,6 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     @player.destroy
 
-    respond_to do |format|
-      format.html { redirect_to players_url }
-      format.json { head :no_content }
-    end
+    redirect_to players_url
   end
 end

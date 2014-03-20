@@ -96,20 +96,10 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @home = Player.find(@game.home_player_id)
     @away = Player.find(@game.away_player_id)
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @game }
-    end
   end
 
   def new
     @game = Game.new
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @game }
-    end
   end
 
   def edit
@@ -119,28 +109,20 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(params[:game])
 
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render json: @game, status: :created, location: @game }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.save
+      redirect_to @game, notice: 'Game was successfully created.'
+    else
+      render action: "new"
     end
   end
 
   def update
     @game = Game.find(params[:id])
 
-    respond_to do |format|
-      if @game.update_attributes(params[:game])
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.update_attributes(params[:game])
+      redirect_to @game, notice: 'Game was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 end
