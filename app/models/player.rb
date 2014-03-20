@@ -6,11 +6,14 @@ class Player < ActiveRecord::Base
   validates :name, uniqueness: { :message => 'This person has already been created.' }
   validates :email, uniqueness: { :message => 'This email has already been used.' }
 
+  has_many :home_games, class_name: 'Game', foreign_key: 'home_player_id'
+  has_many :away_games, class_name: 'Game', foreign_key: 'away_player_id'
+
   def won_game(game)
   end
 
   def games
-    (home_games + away_games).sort_by { |g| g.id }
+    (home_games.active + away_games.active).sort_by { |g| g.id }
   end
 
   def goals
@@ -22,27 +25,19 @@ class Player < ActiveRecord::Base
   end
 
   def home_goals
-    home_games.inject(0) { |goals, game| goals + game.home_player_score }
+    home_games.active.inject(0) { |goals, game| goals + game.home_player_score }
   end
 
   def opposition_home_goals
-    home_games.inject(0) { |goals, game| goals + game.away_player_score }
+    home_games.active.inject(0) { |goals, game| goals + game.away_player_score }
   end
 
   def away_goals
-    away_games.inject(0) { |goals, game| goals + game.away_player_score }
+    away_games.active.inject(0) { |goals, game| goals + game.away_player_score }
   end
 
   def opposition_away_goals
-    away_games.inject(0) { |goals, game| goals + game.home_player_score }
-  end
-
-  def home_games
-    Game.active.where(home_player_id: self.id)
-  end
-
-  def away_games
-    Game.active.where(away_player_id: self.id)
+    away_games.active.inject(0) { |goals, game| goals + game.home_player_score }
   end
 
   def games_won
@@ -58,19 +53,19 @@ class Player < ActiveRecord::Base
   end
 
   def home_games_won
-    self.home_games.select { |g| g.home_player_score > g.away_player_score }
+    self.home_games.active.select { |g| g.home_player_score > g.away_player_score }
   end
 
   def away_games_won
-    self.away_games.select { |g| g.away_player_score > g.home_player_score }
+    self.away_games.active.select { |g| g.away_player_score > g.home_player_score }
   end
 
   def home_games_lost
-    self.home_games.select { |g| g.away_player_score > g.home_player_score }
+    self.home_games.active.select { |g| g.away_player_score > g.home_player_score }
   end
 
   def away_games_lost
-    self.away_games.select { |g| g.home_player_score > g.away_player_score }
+    self.away_games.active.select { |g| g.home_player_score > g.away_player_score }
   end
 
   def best_team

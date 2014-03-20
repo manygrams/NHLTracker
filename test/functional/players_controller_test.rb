@@ -17,10 +17,8 @@ class PlayersControllerTest < ActionController::TestCase
 
   test "should create player" do
     assert_difference ->{ Player.count } do
-      post :create, player: { email: @player.email, name: @player.name }
+      post :create, player: { email: "test@example.com", name: "Test McTest" }
     end
-
-    assert_redirected_to player_path(assigns(:player))
   end
 
   test "should show player" do

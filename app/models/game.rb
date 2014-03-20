@@ -3,6 +3,9 @@ class Game < ActiveRecord::Base
 
   scope :active, -> { where(archived: false) }
 
+  belongs_to :home_player, class_name: 'Player'
+  belongs_to :away_player, class_name: 'Player'
+
   def get_side(player)
     if away_player_id == player.id
       'Away'

@@ -23,7 +23,7 @@ class PlayersController < ApplicationController
     if @player.save
       redirect_to root_url, notice: 'Player was successfully created.'
     else
-      render action: "edit"
+      render action: "new"
     end
   end
 

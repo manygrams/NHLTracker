@@ -4,7 +4,7 @@
       <img src='/<%= GamesController::NHL_TEAMS[@game.away_team][:short_name] %>.gif' />
     </div>
     <h1 class='text-center'><%= @game.away_team %></h1>
-    <h2 class='text-center'><%= @away.name %></h2>
+    <h2 class='text-center'><%= @game.away_player %></h2>
     <h1 class='text-center'><%= @game.away_player_score %></h1>
   </div>
   <div class='col-md-2'>
@@ -15,7 +15,7 @@
       <img src='/<%= GamesController::NHL_TEAMS[@game.home_team][:short_name] %>.gif' />
     </div>
     <h1 class='text-center'><%= @game.home_team %></h1>
-    <h2 class='text-center'><%= @home.name %></h2>
+    <h2 class='text-center'><%= @game.home_player %></h2>
     <h1 class='text-center'><%= @game.home_player_score %></h1>
   </div>
 </div>
