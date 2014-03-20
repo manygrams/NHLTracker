@@ -94,6 +94,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    require 'pry'; binding.pry
     @home = Player.find(@game.home_player_id)
     @away = Player.find(@game.away_player_id)
   end

@@ -1,17 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 one:
-  home_team: MyString
-  away_team: MyString
-  home_player_id: 1
-  away_player_id: 1
-  home_player_score: 1
-  away_team_score: 1
-
-two:
-  home_team: MyString
-  away_team: MyString
-  home_player_id: 1
-  away_player_id: 1
-  home_player_score: 1
-  away_team_score: 1
+  home_team: 'Montreal Canadiens'
+  away_team: 'Boston Bruins'
+  home_player: nick
+  away_player: not_nick
+  home_player_score: 2
+  away_player_score: 1

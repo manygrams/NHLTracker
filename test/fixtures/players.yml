@@ -1,9 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+nick:
+  name: "Nick Evans"
+  email: "nick@example.com"
 
-one:
-  name: MyString
-  email: MyString
-
-two:
-  name: MyString
-  email: MyString
+not_nick:
+  name: "Not Nick Evans"
+  email: "not.nick@example.com"
