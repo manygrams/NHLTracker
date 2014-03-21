@@ -18,4 +18,5 @@ group :development do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'newrelic_rpm'

@@ -1,9 +1,11 @@
 module GamesHelper
-  def all_players
-    Player.all.sort_by { |p| p.name.downcase }.map { |p| [ p.name, p.id ] }
+  def players_for_autocomplete
+    players = Player.all.sort_by { |player| player.name.downcase }
+    players = players.map { |player| "{ label: '#{player.name}', id: '#{player.id}' }" }
+    "[#{players.join(",")}]".html_safe
   end
 
-  def all_teams
-    GamesController::NHL_TEAMS
+  def teams_for_autocomplete
+    "['#{GamesController::NHL_TEAMS.keys.join("','")}']".html_safe
   end
 end
