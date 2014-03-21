@@ -1,7 +1,7 @@
 <div class='row'>
   <div class='col-md-5'>
     <div class='team-icon'>
-      <img src='/<%= GamesController::NHL_TEAMS[@game.away_team][:short_name] %>.gif' />
+      <img src='/<%= team_gif_link(@game.away_team) %>.gif' />
     </div>
     <h1 class='text-center'><%= @game.away_team %></h1>
     <h2 class='text-center'><%= @game.away_player.name %></h2>
@@ -12,7 +12,7 @@
   </div>
   <div class='col-md-5'>
     <div class='team-icon'>
-      <img src='/<%= GamesController::NHL_TEAMS[@game.home_team][:short_name] %>.gif' />
+      <img src='/<%= team_gif_link(@game.home_team) %>.gif' />
     </div>
     <h1 class='text-center'><%= @game.home_team %></h1>
     <h2 class='text-center'><%= @game.home_player.name %></h2>

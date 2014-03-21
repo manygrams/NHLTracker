@@ -8,4 +8,8 @@ module GamesHelper
   def teams_for_autocomplete
     "['#{GamesController::NHL_TEAMS.keys.join("','")}']".html_safe
   end
+
+  def team_gif_link(team)
+    GamesController::NHL_TEAMS[team][:short_name]
+  end
 end
