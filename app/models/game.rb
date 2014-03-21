@@ -6,6 +6,8 @@ class Game < ActiveRecord::Base
   belongs_to :home_player, class_name: 'Player'
   belongs_to :away_player, class_name: 'Player'
 
+  validates :away_team, :home_team, :away_player_id, :home_player_id, :away_player_score, :home_player_score, presence: true
+
   def get_side(player)
     if away_player_id == player.id
       'Away'
