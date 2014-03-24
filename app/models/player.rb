@@ -46,7 +46,6 @@ class Player < ActiveRecord::Base
 
   def win_percent
     games.empty? ? 0 : (games_won.length.to_f / games.length.to_f)
-    
   end
 
   def games_lost
