@@ -21,7 +21,7 @@
         <td><%= player.games_won.length %></td>
         <td><%= player.games_lost.length %></td>
         <td><%= player.goals %></td>
-        <td><%= player.win_percent %></td>
+        <td><%= sprintf "%.3f", player.win_percent %></td>
       </tr>
     <% end %>
   </table>
