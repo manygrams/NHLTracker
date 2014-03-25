@@ -18,3 +18,5 @@ tmp
 config/newrelic.yml
 
 config/database.yml
+
+app/views/players/.nfs.20051025.92cd
