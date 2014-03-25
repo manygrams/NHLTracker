@@ -2,7 +2,7 @@
   <table class='table table-bordered table-hover'>
     <tr>
       <td><h4>Win Percentage</h4></td>
-      <td><h4 class='text-right'><%= @player.win_percent %>%</h4></td>
+      <td><h4 class='text-right'><%= sprintf "%.3f", @player.win_percent %></h4></td>
     </tr>
     <tr>
       <td><h4>Wins</h4></td>

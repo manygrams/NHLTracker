@@ -5,3 +5,11 @@ one:
   away_player: not_nick
   home_player_score: 2
   away_player_score: 1
+
+two:
+  home_team: 'Boston Bruins'
+  away_team: 'Montreal Canadiens'
+  home_player: not_nick
+  away_player: nick
+  home_player_score: 9
+  away_player_score: 8
