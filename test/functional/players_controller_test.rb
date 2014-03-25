@@ -25,4 +25,13 @@ class PlayersControllerTest < ActionController::TestCase
     get :show, id: @player
     assert_response :success
   end
+  test "ranked player list should display stats correctly" do
+    get :index
+
+    assert_select "tr.ranked-player-row" do |elements|
+      elements.each do |element|
+        assert_select "td.win-percent", "0.500"
+      end
+    end
+  end
 end

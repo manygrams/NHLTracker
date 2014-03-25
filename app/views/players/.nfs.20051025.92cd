@@ -9,7 +9,7 @@
       <td><b>Win %</b></td>
     </thead>
     <% @ranked_players.each do |player| %>
-      <tr class="ranked-player-row <%= ranked_list_class(player) %>" id="player-<%= player.id %>">
+      <tr class="<%= ranked_list_class(player) %>">
         <td><%= link_to player.name, player_url(player) %></td>
         <td>
           <% if player.best_team.nil? %>
@@ -21,7 +21,7 @@
         <td><%= player.games_won.length %></td>
         <td><%= player.games_lost.length %></td>
         <td><%= player.goals %></td>
-        <td class="win-percent"><%= sprintf "%.3f", player.win_percent %></td>
+        <td><%= sprintf "%.3f", player.win_percent %></td>
       </tr>
     <% end %>
   </table>
