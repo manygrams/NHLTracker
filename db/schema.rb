@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140313182909) do
+ActiveRecord::Schema.define(:version => 20140326024543) do
 
   create_table "games", :force => true do |t|
     t.string   "home_team"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(:version => 20140313182909) do
     t.datetime "updated_at",                           :null => false
     t.boolean  "archived",          :default => false
   end
+
+  add_index "games", ["away_player_id"], :name => "index_games_on_away_player_id"
+  add_index "games", ["home_player_id"], :name => "index_games_on_home_player_id"
 
   create_table "players", :force => true do |t|
     t.string   "name"
