@@ -31,7 +31,8 @@ class Player < ActiveRecord::Base
 
   def win_percent
     win_percent = games_won.to_f / (home_games.active.size + away_games.active.size)
-    win_percent.nil? ? 0 : win_percent
+    require 'pry'; binding.pry
+    win_percent.nil? | win_percent.nan? ? 0 : win_percent
   end
 
   def favourite_team
