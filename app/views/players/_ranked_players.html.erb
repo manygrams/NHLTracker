@@ -2,7 +2,7 @@
   <table class='table'>
     <thead>
       <td><b>Name</b></td>
-      <td><b>Best Team</b></td>
+      <td><b>Favourite Team</b></td>
       <td><b>Wins</b></td>
       <td><b>Losses</b></td>
       <td><b>Goals</b></td>
@@ -12,14 +12,14 @@
       <tr class="ranked-player-row <%= ranked_list_class(player) %>" id="player-<%= player.id %>">
         <td><%= link_to player.name, player_url(player) %></td>
         <td>
-          <% if player.best_team.nil? %>
+          <% if player.favourite_team.nil? %>
             Player has not won any games
           <% else %>
-            <%= player.best_team %>
+            <%= player.favourite_team %>
           <% end %>
         </td>
-        <td><%= player.games_won.length %></td>
-        <td><%= player.games_lost.length %></td>
+        <td><%= player.games_won %></td>
+        <td><%= player.games_lost %></td>
         <td><%= player.goals %></td>
         <td class="win-percent"><%= sprintf "%.3f", player.win_percent %></td>
       </tr>

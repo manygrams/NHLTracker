@@ -102,6 +102,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    ruby-prof (0.14.2)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -146,6 +147,7 @@ DEPENDENCIES
   pry
   quiet_assets
   rails (= 3.2.14)
+  ruby-prof
   sass-rails (~> 3.2.3)
   therubyracer
   thin

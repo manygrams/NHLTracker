@@ -15,6 +15,7 @@ group :development do
   gem 'quiet_assets'
   gem 'bullet'
   gem 'pry'
+  gem 'ruby-prof'
 end
 
 gem 'jquery-rails'
