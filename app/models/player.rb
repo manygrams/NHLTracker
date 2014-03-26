@@ -23,7 +23,7 @@ class Player < ActiveRecord::Base
       FROM players p
       INNER JOIN games g
       ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id}
+      WHERE p.id = #{id} AND NOT g.archived
     SQL
     result.first["goals"]
   end
@@ -38,7 +38,7 @@ class Player < ActiveRecord::Base
       FROM players p
       INNER JOIN games g
       ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id}
+      WHERE p.id = #{id} AND NOT g.archived
     SQL
     result.first["goals_against"]
   end
@@ -53,7 +53,7 @@ class Player < ActiveRecord::Base
       FROM players p
       INNER JOIN games g
       ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id}
+      WHERE p.id = #{id} AND NOT g.archived
     SQL
     result.first['games_won'].to_i
   end
@@ -68,7 +68,7 @@ class Player < ActiveRecord::Base
       FROM players p
       INNER JOIN games g
       ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id}
+      WHERE p.id = #{id} AND NOT g.archived
     SQL
     result.first['win_pct'].to_f
   end
@@ -83,7 +83,7 @@ class Player < ActiveRecord::Base
       FROM players p
       INNER JOIN games g
       ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id}
+      WHERE p.id = #{id} AND NOT g.archived
     SQL
     result.first['games_lost'].to_i
   end
@@ -101,7 +101,7 @@ class Player < ActiveRecord::Base
         FROM players p
         INNER JOIN games g
         ON p.id = g.home_player_id OR p.id = g.away_player_id
-        WHERE p.id = #{id}
+        WHERE p.id = #{id} AND NOT g.archived
         GROUP BY team_name
         ORDER BY COUNT(1) DESC
         LIMIT 1
