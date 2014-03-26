@@ -25,6 +25,7 @@ class PlayersControllerTest < ActionController::TestCase
     get :show, id: @player
     assert_response :success
   end
+
   test "ranked player list should display stats correctly" do
     get :index
 
