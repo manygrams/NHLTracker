@@ -1,7 +1,6 @@
 class PlayersController < ApplicationController
   def index
-    players = Player.all
-    @ranked_players = players.sort_by { |player| -player.win_percent }
+    @ranked_players = Player.ranked
   end
 
   def show

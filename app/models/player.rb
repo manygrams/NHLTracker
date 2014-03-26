@@ -9,6 +9,10 @@ class Player < ActiveRecord::Base
   has_many :home_games, class_name: 'Game', foreign_key: 'home_player_id'
   has_many :away_games, class_name: 'Game', foreign_key: 'away_player_id'
 
+  def self.ranked
+    Player.all.sort_by { |player| -player.win_percent }
+  end
+
   def games
     (home_games.active + away_games.active).sort_by { |g| g.id }
   end

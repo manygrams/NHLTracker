@@ -6,4 +6,9 @@ module PlayersHelper
   def players_with_no_wins?
     @ranked_players.any? { |player| player.games_won == 0 }
   end
+
+  def favourite_team(player)
+    favourite_team = player.favourite_team
+    favourite_team.nil? ?  "Player has not won any games" : favourite_team
+  end
 end

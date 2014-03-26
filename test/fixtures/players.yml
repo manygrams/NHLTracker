@@ -5,3 +5,7 @@ nick:
 not_nick:
   name: "Not Nick Evans"
   email: "not.nick@example.com"
+
+loser:
+  name: "Loser McLoserson"
+  email: "loser@example.com"

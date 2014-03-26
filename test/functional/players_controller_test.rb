@@ -29,9 +29,29 @@ class PlayersControllerTest < ActionController::TestCase
   test "ranked player list should display stats correctly" do
     get :index
 
-    assert_select "tr.ranked-player-row" do |elements|
+    @ranked_players = Player.ranked
+
+    assert_select "tr.ranked-player-row.has-won" do |elements|
       elements.each do |element|
-        assert_select "td.win-percent", "0.500"
+        current_player = @ranked_players.shift
+
+        assert_select element, "td.player-favourite-team", current_player.favourite_team.to_s
+        assert_select element, "td.player-games-won",      current_player.games_won.to_s
+        assert_select element, "td.player-games-lost",     current_player.games_lost.to_s
+        assert_select element, "td.player-goals-for",      current_player.goals_for.to_s
+        assert_select element, "td.player-win-percent",    sprintf("%.3f", current_player.win_percent)
+      end
+    end
+
+    assert_select "tr.ranked-player-row.no-wins" do |elements|
+      elements.each do |element|
+        current_player = @ranked_players.shift
+
+        assert_select element, "td.player-favourite-team", "Player has not won any games"
+        assert_select element, "td.player-games-won",      "0"
+        assert_select element, "td.player-games-lost",     current_player.games_lost.to_s
+        assert_select element, "td.player-goals-for",      current_player.goals_for.to_s
+        assert_select element, "td.player-win-percent",    "0.000"
       end
     end
   end
