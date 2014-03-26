@@ -5,7 +5,7 @@
       <td><b>Favourite Team</b></td>
       <td><b>Wins</b></td>
       <td><b>Losses</b></td>
-      <td><b>Goals</b></td>
+      <td><b>Goals For</b></td>
       <td><b>Win %</b></td>
     </thead>
     <% @ranked_players.each do |player| %>
@@ -20,7 +20,7 @@
         </td>
         <td><%= player.games_won %></td>
         <td><%= player.games_lost %></td>
-        <td><%= player.goals %></td>
+        <td><%= player.goals_for %></td>
         <td class="win-percent"><%= sprintf "%.3f", player.win_percent %></td>
       </tr>
     <% end %>

@@ -13,79 +13,24 @@ class Player < ActiveRecord::Base
     (home_games.active + away_games.active).sort_by { |g| g.id }
   end
 
-  def goals
-    result = ActiveRecord::Base.connection.execute <<-SQL
-      SELECT
-        SUM(
-          (p.id = g.home_player_id)::INT * g.home_player_score + 
-          (p.id = g.away_player_id)::INT * g.away_player_score
-        ) AS goals
-      FROM players p
-      INNER JOIN games g
-      ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id} AND NOT g.archived
-    SQL
-    result.first["goals"]
+  def goals_for
+    home_games.active.sum(:home_player_score) + away_games.active.sum(:away_player_score)
   end
 
-  def opposition_goals
-    result = ActiveRecord::Base.connection.execute <<-SQL
-      SELECT
-        SUM(
-          (p.id = g.home_player_id)::INT * g.away_player_score + 
-          (p.id = g.away_player_id)::INT * g.home_player_score
-        ) AS goals_against
-      FROM players p
-      INNER JOIN games g
-      ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id} AND NOT g.archived
-    SQL
-    result.first["goals_against"]
+  def goals_against
+    home_games.active.sum(:away_player_score) + away_games.active.sum(:home_player_score)
   end
 
   def games_won
-    result = ActiveRecord::Base.connection.execute <<-SQL
-      SELECT
-        SUM((
-          p.id = g.home_player_id AND g.home_player_score > g.away_player_score OR
-          p.id = g.away_player_id AND g.away_player_score > g.home_player_score
-        )::INT) AS games_won
-      FROM players p
-      INNER JOIN games g
-      ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id} AND NOT g.archived
-    SQL
-    result.first['games_won'].to_i
-  end
-
-  def win_percent
-    result = ActiveRecord::Base.connection.execute <<-SQL
-      SELECT
-        SUM((
-          p.id = g.home_player_id AND g.home_player_score > g.away_player_score OR
-          p.id = g.away_player_id AND g.away_player_score > g.home_player_score
-        )::INT)::FLOAT / COUNT(1) AS win_pct
-      FROM players p
-      INNER JOIN games g
-      ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id} AND NOT g.archived
-    SQL
-    result.first['win_pct'].to_f
+    home_games.active.home_player_won.size + away_games.active.away_player_won.size
   end
 
   def games_lost
-    result = ActiveRecord::Base.connection.execute <<-SQL
-      SELECT
-        SUM((
-          p.id = g.home_player_id AND g.home_player_score < g.away_player_score OR
-          p.id = g.away_player_id AND g.away_player_score < g.home_player_score
-        )::INT) AS games_lost
-      FROM players p
-      INNER JOIN games g
-      ON p.id = g.home_player_id OR p.id = g.away_player_id
-      WHERE p.id = #{id} AND NOT g.archived
-    SQL
-    result.first['games_lost'].to_i
+    home_games.active.home_player_lost.size + away_games.active.away_player_lost.size
+  end
+
+  def win_percent
+    games_won.to_f / (home_games.active.size + away_games.active.size)
   end
 
   def favourite_team

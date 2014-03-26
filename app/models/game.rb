@@ -2,6 +2,10 @@ class Game < ActiveRecord::Base
   attr_accessible :away_player_id, :away_team, :away_player_score, :home_player_id, :home_player_score, :home_team, :archived
 
   scope :active, -> { where(archived: false) }
+  scope :home_player_won, -> { where("home_player_score > away_player_score") }
+  scope :away_player_won, -> { where("away_player_score > home_player_score") }
+  scope :home_player_lost, -> { where("home_player_score < away_player_score") }
+  scope :away_player_lost, -> { where("away_player_score < home_player_score") }
 
   belongs_to :home_player, class_name: 'Player'
   belongs_to :away_player, class_name: 'Player'

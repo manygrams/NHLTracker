@@ -16,6 +16,7 @@ group :development do
   gem 'bullet'
   gem 'pry'
   gem 'ruby-prof'
+  gem 'rack-mini-profiler'
 end
 
 gem 'jquery-rails'
