@@ -13,6 +13,8 @@ class Game < ActiveRecord::Base
   validates :away_team, :home_team, :away_player_id, :home_player_id, :away_player_score, :home_player_score, presence: true
   validates :away_player, :home_player, associated: true
 
+  after_save :update_player_statistics
+
   def get_side(player)
     if away_player_id == player.id
       'Away'
@@ -69,5 +71,10 @@ class Game < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def update_player_statistics
+    home_player.update_statistics
+    away_player.update_statistics
   end
 end

@@ -24,6 +24,12 @@ class PlayersControllerTest < ActionController::TestCase
   test "should show player" do
     get :show, id: @player
     assert_response :success
+
+    assert_select "h4#stat-win-percent", "0.500"
+    assert_select "h4#stat-games-won", "1"
+    assert_select "h4#stat-games-lost", "1"
+    assert_select "h4#stat-goals-for", "10"
+    assert_select "h4#stat-goals-against", "10"
   end
 
   test "ranked player list should display stats correctly" do
