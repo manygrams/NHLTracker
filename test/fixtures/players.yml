@@ -1,10 +1,22 @@
 nick:
   name: "Nick Evans"
   email: "nick@example.com"
+  win_percent: 0.5
+  games_won: 1
+  games_lost: 1
+  goals_for: 10
+  goals_against: 10
+  favourite_team: "Montreal Canadiens"
 
 not_nick:
   name: "Not Nick Evans"
   email: "not.nick@example.com"
+  win_percent: 0.5
+  games_won: 1
+  games_lost: 1
+  goals_for: 10
+  goals_against: 10
+  favourite_team: "Boston Bruins"
 
 loser:
   name: "Loser McLoserson"

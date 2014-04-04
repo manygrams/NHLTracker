@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  attr_accessible :email, :name
+  attr_accessible :email, :name, :goals_for, :goals_against, :games_won, :games_lost, :win_percent, :favourite_team
 
   validates :name, presence: true
   validates :email, presence: true
@@ -17,28 +17,28 @@ class Player < ActiveRecord::Base
     (home_games.active + away_games.active).sort_by { |g| g.id }
   end
 
-  def goals_for
+  def calculate_goals_for
     home_games.active.sum(:home_player_score) + away_games.active.sum(:away_player_score)
   end
 
-  def goals_against
+  def calculate_goals_against
     home_games.active.sum(:away_player_score) + away_games.active.sum(:home_player_score)
   end
 
-  def games_won
+  def calculate_games_won
     home_games.active.home_player_won.size + away_games.active.away_player_won.size
   end
 
-  def games_lost
+  def calculate_games_lost
     home_games.active.home_player_lost.size + away_games.active.away_player_lost.size
   end
 
-  def win_percent
+  def calculate_win_percent
     win_percent = games_won.to_f / (home_games.active.size + away_games.active.size)
     win_percent.nil? | win_percent.nan? ? 0 : win_percent
   end
 
-  def favourite_team
+  def calculate_favourite_team
     if games_won == 0
       nil
     else
@@ -58,5 +58,14 @@ class Player < ActiveRecord::Base
       SQL
       result.first['team_name']
     end
+  end
+
+  def update_statistics
+    update_attribute(:goals_for, calculate_goals_for)
+    update_attribute(:goals_against, calculate_goals_against)
+    update_attribute(:games_won, calculate_games_won)
+    update_attribute(:games_lost, calculate_games_lost)
+    update_attribute(:win_percent, calculate_win_percent)
+    update_attribute(:favourite_team, calculate_favourite_team)
   end
 end

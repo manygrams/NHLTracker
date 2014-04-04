@@ -2,23 +2,23 @@
   <table class='table table-bordered table-hover'>
     <tr>
       <td><h4>Win Percentage</h4></td>
-      <td><h4 class='text-right'><%= sprintf "%.3f", @player.win_percent %></h4></td>
+      <td><h4 id="stat-win-percent" class='text-right'><%= sprintf "%.3f", @player.win_percent %></h4></td>
     </tr>
     <tr>
       <td><h4>Wins</h4></td>
-      <td><h4 class='text-right'><%= @player.games_won %></h4></td>
+      <td><h4 id="stat-games-won" class='text-right'><%= @player.games_won %></h4></td>
     </tr>
     <tr>
       <td><h4>Losses</h4></td>
-      <td><h4 class='text-right'><%= @player.games_lost %></h4></td>
+      <td><h4 id="stat-games-lost" class='text-right'><%= @player.games_lost %></h4></td>
     </tr>
     <tr>
       <td><h4>Goals For</h4></td>
-      <td><h4 class='text-right'><%= @player.goals_for %></h4></td>
+      <td><h4 id="stat-goals-for" class='text-right'><%= @player.goals_for %></h4></td>
     </tr>
     <tr>
       <td><h4>Goals Against</h4></td>
-      <td><h4 class='text-right'><%= @player.goals_against %></h4></td>
+      <td><h4 id="stat-goals-against" class='text-right'><%= @player.goals_against %></h4></td>
     </tr>
   </table>
 </div>
